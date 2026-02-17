@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EpiVerse | Connecting Diners, Elevating Experiences</title>
+    
+    <!-- Favicon - Using the same logo image -->
+    <link rel="icon" type="image/jpeg" href="IMG_2368.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="IMG_2368.jpg">
+    <link rel="apple-touch-icon" href="IMG_2368.jpg">
+    
+    <!-- For better browser compatibility, you might want to add these as well -->
+    <link rel="icon" type="image/png" sizes="32x32" href="IMG_2368.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="IMG_2368.jpg">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and Base Styles */
@@ -386,6 +396,97 @@
             background-color: #1da851;
         }
 
+        /* Contact Form Styles */
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-form h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: rgba(255, 107, 53, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder,
+        .form-group select::placeholder {
+            color: var(--text-gray);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b0b0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        .form-group select option {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+        }
+
+        .submit-button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+            background-color: #ff5722;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
         /* Footer */
         footer {
             background-color: rgba(10, 15, 30, 0.9);
@@ -538,6 +639,11 @@
 
             .contact-content {
                 gap: 40px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
             }
         }
 
@@ -721,13 +827,55 @@
                             <a href="#" class="social-link">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="https://www.instagram.com/pune.socialcompass?igsh=N2szbTk3am03Mndz" class="social-link" target="_blank">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="https://www.linkedin.com/company/epiverse/" class="social-link" target="_blank">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm" action="#" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="firstName" name="firstName" placeholder="First Name *" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email Address *" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <select id="inquiryType" name="inquiryType">
+                                    <option value="" disabled selected>Select Inquiry Type</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="venue">Venue Registration</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Your Message *" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-button">
+                                <i class="fas fa-paper-plane" style="margin-right: 10px;"></i> Send Message
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -791,6 +939,26 @@
             });
         });
 
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const firstName = document.getElementById('firstName').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!firstName || !email || !message) {
+                alert('Please fill in all required fields (First Name, Email, and Message)');
+                return;
+            }
+            
+            // Here you would typically send the form data to your server
+            // For now, we'll just show a success message
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset(); // Reset the form
+        });
+
         // Animation on scroll
         const observerOptions = {
             threshold: 0.1,
@@ -808,7 +976,7 @@
 
         // Observe elements for animation
         document.addEventListener('DOMContentLoaded', function () {
-            const animatedElements = document.querySelectorAll('.about-text, .about-image, .contact');
+            const animatedElements = document.querySelectorAll('.about-text, .about-image, .contact, .contact-form');
             animatedElements.forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
