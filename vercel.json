@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/send-contact.js": {
+      "runtime": "nodejs@18.x"
+    }
+  }
+}
