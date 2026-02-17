@@ -1,6 +1,10 @@
 {
+  "name": "epiverse-contact-form",
+  "version": "1.0.0",
+  "description": "Contact form with Resend on Vercel",
+  "main": "index.html",
   "private": true,
   "dependencies": {
-    "@vercel/edge": "^0.1.2"
+    "resend": "^4.0.0"
   }
 }
