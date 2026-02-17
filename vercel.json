@@ -1,7 +1,14 @@
 {
   "functions": {
-    "api/send-contact.js": {
-      "runtime": "nodejs18.x"
+    "api/*.php": {
+      "runtime": "vercel-php@0.6.0"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/send-contact",
+      "dest": "/api/send-contact.php",
+      "methods": ["POST", "OPTIONS"]
+    }
+  ]
 }
