@@ -941,11 +941,10 @@
             });
         });
 
-        // FORM SUBMISSION HANDLING WITH RESEND
-        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+        // Form submission handling with PHP
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            // Get form data
+            
             const formData = {
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
@@ -954,50 +953,35 @@
                 inquiryType: document.getElementById('inquiryType').value,
                 message: document.getElementById('message').value
             };
-
-            // Basic validation
+            
             if (!formData.firstName || !formData.email || !formData.message) {
-                alert('Please fill in all required fields (First Name, Email, and Message)');
+                alert('Please fill in all required fields');
                 return;
             }
-
-            // Show loading state
+            
             const submitBtn = this.querySelector('.submit-button');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i> Sending...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
-
+            
             try {
-                // Send to your serverless function
                 const response = await fetch('/api/send-contact', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-
+                
                 const data = await response.json();
-
-                if (data.status === 'success') {
-                    // Success - show success message and reset form
-                    alert('Thank you for your message! We will get back to you soon.');
-                    this.reset(); // Reset the form
-
-                    // Optional: redirect to thank you page after short delay
-                    // setTimeout(() => {
-                    //     window.location.href = '/thank-you.html';
-                    // }, 2000);
+                
+                if (response.ok) {
+                    alert('Thank you! Your message has been sent.');
+                    this.reset();
                 } else {
-                    alert('Error: ' + data.message);
-                    // Reset button
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
+                    alert('Error: ' + (data.error || 'Failed to send message'));
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Failed to send message. Please check your connection and try again.');
-                // Reset button
+                alert('Network error. Please try again.');
+            } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
