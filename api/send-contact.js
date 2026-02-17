@@ -1,8 +1,8 @@
-
 // api/send-contact.js
-// IMPORTANT: Force Node.js runtime (required for Resend to work on Vercel)
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+// IMPORTANT: Force Node.js runtime
+export const config = {
+  runtime: 'nodejs18.x'
+};
 
 import { Resend } from 'resend';
 
@@ -37,7 +37,16 @@ export default async function handler(req, res) {
             });
         }
 
-        // Initialize Resend with API key from environment variables
+        // Check if API key exists
+        if (!process.env.RESEND_API_KEY) {
+            console.error('RESEND_API_KEY is not set');
+            return res.status(500).json({ 
+                status: 'error', 
+                message: 'Server configuration error' 
+            });
+        }
+
+        // Initialize Resend with API key
         const resend = new Resend(process.env.RESEND_API_KEY);
 
         // Prepare email content
@@ -51,20 +60,20 @@ export default async function handler(req, res) {
             <p>${message.replace(/\n/g, '<br>')}</p>
         `;
 
-        // Send email using Resend [citation:1][citation:8]
+        // Send email using Resend
         const { data, error } = await resend.emails.send({
-            from: process.env.FROM_EMAIL || 'EpiVerse <onboarding@resend.dev>', // Use verified domain in production
+            from: 'EpiVerse <onboarding@resend.dev>',
             to: ['parikshitwagh555@gmail.com'],
-            subject: `New Contact Form Submission from ${firstName} ${lastName || ''}`,
+            subject: `New Contact: ${firstName} ${lastName || ''}`,
             html: emailContent,
-            reply_to: email, // So you can reply directly to the sender
+            reply_to: email,
         });
 
         if (error) {
             console.error('Resend error:', error);
             return res.status(500).json({ 
                 status: 'error', 
-                message: 'Failed to send email' 
+                message: error.message || 'Failed to send email' 
             });
         }
 
@@ -78,7 +87,7 @@ export default async function handler(req, res) {
         console.error('Server error:', error);
         return res.status(500).json({ 
             status: 'error', 
-            message: 'Internal server error' 
+            message: error.message || 'Internal server error' 
         });
     }
 }
