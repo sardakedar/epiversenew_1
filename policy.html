@@ -309,7 +309,7 @@
 
         .policy-section {
             margin-bottom: 50px;
-            scroll-margin-top: 120px;
+            scroll-margin-top: 130px;
         }
 
         .policy-section:last-child {
@@ -334,44 +334,22 @@
             border-radius: 50%;
         }
 
-        .policy-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        .policy-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-            box-shadow: var(--shadow);
-        }
-
-        .policy-card h3 {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .policy-card h3 i {
-            font-size: 1.3rem;
-        }
-
-        .policy-card p {
+        .policy-section p {
             color: var(--text-gray);
             font-size: 1.1rem;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             line-height: 1.8;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .policy-section p strong {
+            color: var(--accent-color);
         }
 
         .policy-list {
             list-style: none;
-            margin: 20px 0;
+            margin: 20px 0 30px 20px;
         }
 
         .policy-list li {
@@ -393,7 +371,7 @@
 
         .bullet-list {
             list-style: none;
-            margin: 15px 0 15px 20px;
+            margin: 15px 0 30px 35px;
         }
 
         .bullet-list li {
@@ -417,10 +395,16 @@
             border-left: 4px solid var(--accent-color);
             padding: 25px;
             border-radius: 10px;
-            margin: 25px 0;
+            margin: 25px 0 35px 0;
         }
 
         .highlight-box p {
+            border-left: none;
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box p:last-child {
             margin-bottom: 0;
         }
 
@@ -428,7 +412,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            margin-top: 30px;
+            margin-top: 50px;
         }
 
         .contact-item {
@@ -457,6 +441,8 @@
 
         .contact-item p {
             color: var(--text-gray);
+            border-left: none;
+            padding-left: 0;
         }
 
         .contact-item a {
@@ -508,6 +494,11 @@
 
         .footer-links a:hover {
             color: var(--accent-color);
+        }
+
+        .footer-content a:hover {
+            color: var(--accent-color) !important;
+            text-decoration: underline !important;
         }
 
         .copyright {
@@ -598,17 +589,9 @@
                 padding: 10px;
             }
 
-            .policy-card {
-                padding: 25px;
-            }
-
-            .policy-card h3 {
-                font-size: 1.3rem;
-            }
-
-            .policy-card p,
-            .policy-list li {
+            .policy-section p {
                 font-size: 1rem;
+                padding-left: 15px;
             }
 
             .policy-container {
@@ -665,7 +648,7 @@
     <header id="header">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <img src="epiverse_logo.png" alt="EpiVerse Logo" class="logo-img">
+                <img src="images/epiverse_logo.png" alt="EpiVerse Logo" class="logo-img">
             </a>
 
             <div class="nav-links">
@@ -699,7 +682,7 @@
                 <p>Transparency is at the heart of everything we do. Please review our policies carefully.</p>
             </div>
 
-            <!-- Policy Navigation Tabs -->
+            <!-- Policy Navigation Tabs - Only 3 tabs, Disclaimer removed -->
             <div class="policy-tabs">
                 <a href="#terms" class="policy-tab active">
                     <i class="fas fa-file-contract"></i>
@@ -713,19 +696,10 @@
                     <i class="fas fa-shield-alt"></i>
                     Privacy Policy
                 </a>
-                <a href="#disclaimer" class="policy-tab">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Disclaimer
-                </a>
             </div>
 
             <!-- Policy Container -->
             <div class="policy-container">
-                <!-- <div class="last-updated">
-                    <i class="fas fa-calendar-alt"></i>
-                    Last Updated: February 18, 2026
-                </div> -->
-
                 <!-- TERMS AND CONDITIONS SECTION -->
                 <section id="terms" class="policy-section">
                     <h2 class="section-title">
@@ -733,44 +707,21 @@
                         Terms and Conditions
                     </h2>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-check-circle"></i> Acceptance of Terms</h3>
-                        <p>By accessing or using the EpiVerse platform, website, or any associated services, you agree
-                            to be legally bound by these Terms and Conditions. If you do not agree with any part of
-                            these terms, please refrain from using our services.</p>
-                    </div>
+                    <p><strong>Acceptance of Terms:</strong> By accessing or using the EpiVerse platform, website, or any associated services, you agree to be legally bound by these Terms and Conditions. If you do not agree with any part of these terms, please refrain from using our services.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-map"></i> Platform Overview</h3>
-                        <p>EpiVerse is a technology platform designed to connect users with curated dining, nightlife,
-                            and hospitality experiences. Our services include venue discovery, reservations, event
-                            bookings, and digital concierge services. Features may be modified or updated without prior
-                            notice.</p>
-                    </div>
+                    <p><strong>Platform Overview:</strong> EpiVerse is a technology platform designed to connect users with curated dining, nightlife, and hospitality experiences. Our services include venue discovery, reservations, event bookings, and digital concierge services. Features may be modified or updated without prior notice.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-copyright"></i> Intellectual Property</h3>
-                        <p>All content on this platform—including logos, trademarks, text, graphics, and software—is the
-                            exclusive property of EpiVerse India Pvt Ltd. Unauthorized reproduction or distribution is
-                            strictly prohibited.</p>
-                    </div>
+                    <p><strong>Intellectual Property:</strong> All content on this platform—including logos, trademarks, text, graphics, and software—is the exclusive property of EpiVerse India Pvt Ltd. Unauthorized reproduction or distribution is strictly prohibited.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-user-shield"></i> User Responsibilities</h3>
-                        <p>As a user, you agree to:</p>
-                        <ul class="policy-list">
-                            <li>Provide accurate information when creating an account</li>
-                            <li>Maintain confidentiality of your account credentials</li>
-                            <li>Use the platform only for lawful purposes</li>
-                            <li>Not attempt to breach security measures</li>
-                        </ul>
-                    </div>
+                    <p><strong>User Responsibilities:</strong> As a user, you agree to:</p>
+                    <ul class="policy-list">
+                        <li>Provide accurate information when creating an account</li>
+                        <li>Maintain confidentiality of your account credentials</li>
+                        <li>Use the platform only for lawful purposes</li>
+                        <li>Not attempt to breach security measures</li>
+                    </ul>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-balance-scale"></i> Governing Law</h3>
-                        <p>These terms are governed by the laws of India. Any disputes shall be subject to the exclusive
-                            jurisdiction of courts in Pune, Maharashtra.</p>
-                    </div>
+                    <p><strong>Governing Law:</strong> These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of courts in Pune, Maharashtra.</p>
                 </section>
 
                 <!-- REFUND POLICY SECTION -->
@@ -780,53 +731,40 @@
                         Refund & Cancellation Policy
                     </h2>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-info-circle"></i> General Policy</h3>
-                        <p>We strive to ensure your satisfaction. Due to the nature of digital services and venue
-                            bookings, our refund policy is designed to be fair to all parties.</p>
-                    </div>
+                    <p><strong>General Policy:</strong> We strive to ensure your satisfaction. Due to the nature of digital services and venue bookings, our refund policy is designed to be fair to all parties.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-check-circle"></i> Eligibility for Refunds</h3>
-                        <p>Refunds may be considered for:</p>
-                        <ul class="policy-list">
-                            <li><strong>Duplicate Transactions:</strong> Multiple charges for the same service</li>
-                            <li><strong>Unauthorized Charges:</strong> Transactions not authorized by you</li>
-                            <li><strong>Service Failure:</strong> Technical errors preventing service delivery</li>
-                        </ul>
+                    <p><strong>Eligibility for Refunds:</strong> Refunds may be considered for:</p>
+                    <ul class="policy-list">
+                        <li><strong>Duplicate Transactions:</strong> Multiple charges for the same service</li>
+                        <li><strong>Unauthorized Charges:</strong> Transactions not authorized by you</li>
+                        <li><strong>Service Failure:</strong> Technical errors preventing service delivery</li>
+                    </ul>
 
-                        <div class="highlight-box">
-                            <h4 style="color: var(--accent-color); margin-bottom: 10px;">Not Eligible for Refund:</h4>
-                            <ul class="bullet-list">
-                                <li>Change of mind</li>
-                                <li>Incorrect information provided by user</li>
-                                <li>Issues outside our control (venue cancellations, weather)</li>
-                                <li>Services already rendered</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="policy-card">
-                        <h3><i class="fas fa-clock"></i> Cancellation Timeline</h3>
-                        <ul class="policy-list">
-                            <li><strong>48+ hours before:</strong> Full refund (minus processing fees)</li>
-                            <li><strong>24-48 hours before:</strong> 50% refund</li>
-                            <li><strong>Less than 24 hours:</strong> No refund</li>
-                            <li><strong>No-show:</strong> No refund</li>
-                        </ul>
-                    </div>
-
-                    <div class="policy-card">
-                        <h3><i class="fas fa-envelope"></i> How to Request</h3>
-                        <p>Email us at <strong style="color: var(--accent-color);">hello@epiverse.in</strong> within 7
-                            days with:</p>
+                    <div class="highlight-box">
+                        <p><strong>Not Eligible for Refund:</strong></p>
                         <ul class="bullet-list">
-                            <li>Full name</li>
-                            <li>Transaction ID</li>
-                            <li>Reason for refund</li>
-                            <li>Proof of payment</li>
+                            <li>Change of mind</li>
+                            <li>Incorrect information provided by user</li>
+                            <li>Issues outside our control (venue cancellations, weather)</li>
+                            <li>Services already rendered</li>
                         </ul>
                     </div>
+
+                    <p><strong>Cancellation Timeline:</strong></p>
+                    <ul class="policy-list">
+                        <li><strong>48+ hours before:</strong> Full refund (minus processing fees)</li>
+                        <li><strong>24-48 hours before:</strong> 50% refund</li>
+                        <li><strong>Less than 24 hours:</strong> No refund</li>
+                        <li><strong>No-show:</strong> No refund</li>
+                    </ul>
+
+                    <p><strong>How to Request:</strong> Email us at <strong style="color: var(--accent-color);">hello@epiverse.in</strong> within 7 days with:</p>
+                    <ul class="bullet-list">
+                        <li>Full name</li>
+                        <li>Transaction ID</li>
+                        <li>Reason for refund</li>
+                        <li>Proof of payment</li>
+                    </ul>
                 </section>
 
                 <!-- PRIVACY POLICY SECTION -->
@@ -836,84 +774,54 @@
                         Privacy Policy
                     </h2>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-database"></i> Information We Collect</h3>
-                        <ul class="policy-list">
-                            <li><strong>Personal Information:</strong> Name, email, phone number</li>
-                            <li><strong>Payment Details:</strong> Billing information (processed securely)</li>
-                            <li><strong>Usage Data:</strong> IP address, browser type, pages visited</li>
-                            <li><strong>Location:</strong> General area for venue recommendations</li>
-                        </ul>
+                    <p><strong>Information We Collect:</strong></p>
+                    <ul class="policy-list">
+                        <li><strong>Personal Information:</strong> Name, email, phone number</li>
+                        <li><strong>Payment Details:</strong> Billing information (processed securely)</li>
+                        <li><strong>Usage Data:</strong> IP address, browser type, pages visited</li>
+                        <li><strong>Location:</strong> General area for venue recommendations</li>
+                    </ul>
+
+                    <p><strong>How We Use Your Information:</strong></p>
+                    <ul class="bullet-list">
+                        <li>Provide and personalize services</li>
+                        <li>Process transactions</li>
+                        <li>Respond to inquiries</li>
+                        <li>Improve platform functionality</li>
+                        <li>Send updates and offers (opt-out available)</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <p><strong>We do not sell your personal data.</strong> Your trust is our priority.</p>
                     </div>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-chart-line"></i> How We Use Your Information</h3>
-                        <ul class="bullet-list">
-                            <li>Provide and personalize services</li>
-                            <li>Process transactions</li>
-                            <li>Respond to inquiries</li>
-                            <li>Improve platform functionality</li>
-                            <li>Send updates and offers (opt-out available)</li>
-                        </ul>
+                    <p><strong>Data Security:</strong></p>
+                    <ul class="bullet-list">
+                        <li>AES-256 encryption for sensitive data</li>
+                        <li>SSL/TLS for all transmissions</li>
+                        <li>Regular security audits</li>
+                        <li>Strict access controls</li>
+                    </ul>
 
-                        <div class="highlight-box">
-                            <p><strong>We do not sell your personal data.</strong> Your trust is our priority.</p>
-                        </div>
-                    </div>
+                    <p><strong>Cookies:</strong> We use cookies to enhance your experience. You can manage cookie preferences in your browser settings.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-lock"></i> Data Security</h3>
-                        <ul class="bullet-list">
-                            <li>AES-256 encryption for sensitive data</li>
-                            <li>SSL/TLS for all transmissions</li>
-                            <li>Regular security audits</li>
-                            <li>Strict access controls</li>
-                        </ul>
-                    </div>
-
-                    <div class="policy-card">
-                        <h3><i class="fas fa-cookie-bite"></i> Cookies</h3>
-                        <p>We use cookies to enhance your experience. You can manage cookie preferences in your browser
-                            settings.</p>
-                    </div>
-
-                    <div class="policy-card">
-                        <h3><i class="fas fa-user-edit"></i> Your Rights</h3>
-                        <p>You may request access, correction, or deletion of your data by contacting <strong
-                                style="color: var(--accent-color);">privacy@epiverse.in</strong></p>
-                    </div>
+                    <p><strong>Your Rights:</strong> You may request access, correction, or deletion of your data by contacting <strong style="color: var(--accent-color);">hello@epiverse.in</strong></p>
                 </section>
 
-                <!-- DISCLAIMER SECTION -->
+                <!-- DISCLAIMER SECTION - Kept the content but removed from tabs -->
                 <section id="disclaimer" class="policy-section">
                     <h2 class="section-title">
                         <i class="fas fa-exclamation-triangle"></i>
                         Disclaimer
                     </h2>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-info-circle"></i> General Disclaimer</h3>
-                        <p>Information on this platform is for general purposes only. We make no warranties about
-                            accuracy or completeness.</p>
-                    </div>
+                    <p><strong>General Disclaimer:</strong> Information on this platform is for general purposes only. We make no warranties about accuracy or completeness.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-link"></i> Third-Party Links</h3>
-                        <p>We are not responsible for content or practices of third-party websites linked from our
-                            platform.</p>
-                    </div>
+                    <p><strong>Third-Party Links:</strong> We are not responsible for content or practices of third-party websites linked from our platform.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-clipboard-check"></i> No Guarantee</h3>
-                        <p>Venue information, pricing, and availability may change. Please verify directly with venues
-                            when necessary.</p>
-                    </div>
+                    <p><strong>No Guarantee:</strong> Venue information, pricing, and availability may change. Please verify directly with venues when necessary.</p>
 
-                    <div class="policy-card">
-                        <h3><i class="fas fa-exclamation-circle"></i> Limitation of Liability</h3>
-                        <p>EpiVerse shall not be liable for any damages arising from use of our platform or services.
-                        </p>
-                    </div>
+                    <p><strong>Limitation of Liability:</strong> EpiVerse shall not be liable for any damages arising from use of our platform or services.</p>
                 </section>
 
                 <!-- CONTACT INFORMATION -->
@@ -923,11 +831,6 @@
                         <h4>General Inquiries</h4>
                         <p><a href="mailto:hello@epiverse.in">hello@epiverse.in</a></p>
                     </div>
-                    <!-- <div class="contact-item">
-                        <i class="fas fa-lock"></i>
-                        <h4>Privacy Concerns</h4>
-                        <p><a href="mailto:privacy@epiverse.in">privacy@epiverse.in</a></p>
-                    </div> -->
                     <div class="contact-item">
                         <i class="fas fa-phone-alt"></i>
                         <h4>Phone Support</h4>
@@ -936,8 +839,7 @@
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>Address</h4>
-                        <p>IVORY ESTATE, Ivory Estate Road, Ward No. 8, NCL Colony, Aundh, Pune,
-                            Maharashtra, India</p>
+                        <p>IVORY ESTATE, Ivory Estate Road, Ward No. 8, NCL Colony, Aundh, Pune, Maharashtra, India</p>
                     </div>
                 </div>
             </div>
@@ -972,8 +874,7 @@
                         <span style="color: var(--text-gray); margin: 0 5px;">/</span>
                         <a href="tel:+919175544472"
                             style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">+91
-                            91755
-                            44472</a>
+                            91755 44472</a>
                     </p>
                     <p>
                         <i class="fas fa-envelope"
@@ -982,14 +883,6 @@
                             style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">hello@epiverse.in</a>
                     </p>
                 </div>
-
-                <style>
-                    /* Add this to your existing styles */
-                    .footer-content a:hover {
-                        color: var(--accent-color) !important;
-                        text-decoration: underline !important;
-                    }
-                </style>
             </div>
             <div class="copyright">
                 Copyright © 2026 Epiverse.in - All Rights Reserved.
@@ -1034,7 +927,7 @@
             });
         }
 
-        // Policy tab active state and smooth scrolling
+        // Policy tab active state and smooth scrolling - FIXED VERSION
         const policyTabs = document.querySelectorAll('.policy-tab');
         const sections = document.querySelectorAll('.policy-section');
 
@@ -1046,33 +939,39 @@
                 policyTabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
 
-                // Smooth scroll to section
+                // Smooth scroll to section with accurate offset
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
 
                 if (targetSection) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20; // 20px extra padding
+                    
                     window.scrollTo({
-                        top: targetSection.offsetTop - 100,
+                        top: targetPosition,
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Update active tab on scroll
+        // Update active tab on scroll with improved accuracy
         window.addEventListener('scroll', function () {
             let current = '';
-            const scrollPos = window.scrollY + 150;
-
+            const headerHeight = document.getElementById('header').offsetHeight;
+            const scrollPos = window.scrollY + headerHeight + 50; // Offset for better detection
+            
+            // Check each section to see which one is currently in view
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
+                const sectionTop = section.offsetTop - 50;
                 const sectionBottom = sectionTop + section.offsetHeight;
-
+                
                 if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
                     current = section.getAttribute('id');
                 }
             });
 
+            // Update active tab (only for tabs that exist)
             policyTabs.forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.getAttribute('href') === `#${current}`) {
@@ -1099,37 +998,25 @@
             });
         });
 
-        // Animation on scroll for policy cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.policy-card').forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            card.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(card);
-        });
-
-        // Handle URL hash on page load
+        // Handle URL hash on page load with improved accuracy
         window.addEventListener('load', function () {
             if (window.location.hash) {
                 const targetSection = document.querySelector(window.location.hash);
                 if (targetSection) {
+                    // Set active tab only if the hash matches a tab
+                    policyTabs.forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.getAttribute('href') === window.location.hash) {
+                            tab.classList.add('active');
+                        }
+                    });
+
                     setTimeout(() => {
+                        const headerHeight = document.getElementById('header').offsetHeight;
+                        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                        
                         window.scrollTo({
-                            top: targetSection.offsetTop - 100,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                     }, 100);
