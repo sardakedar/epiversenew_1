@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EpiVerse | Connecting Diners, Elevating Experiences</title>
 
-    <!-- Favicon - Using the same logo image -->
     <link rel="icon" type="image/png" href="1762438251889.jfif">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,8 +20,8 @@
         }
 
         :root {
-            --primary-color: #061536;
-            --secondary-color: #061536;
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
             --accent-color: #ff6b35;
             --text-light: #f5f5f5;
             --text-gray: #b0b0b0;
@@ -58,7 +58,7 @@
         }
 
         .bg-image {
-            background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0');
+            background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -73,9 +73,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg,
-                    rgba(6, 21, 54, 0.92) 0%,
-                    rgba(6, 21, 54, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(22, 33, 62, 0.8) 100%);
         }
 
         /* Header & Navigation */
@@ -84,13 +82,12 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(6, 21, 54, 0.9);
+            background-color: rgba(26, 26, 46, 0.9);
             backdrop-filter: blur(10px);
             padding: 20px 0;
             transition: var(--transition);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
-
 
         header.scrolled {
             padding: 15px 0;
@@ -253,7 +250,7 @@
 
         .about-content {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 60px;
             flex-wrap: wrap;
         }
@@ -276,24 +273,88 @@
             color: var(--text-gray);
         }
 
-        .about-image {
+        .about-text .subheading {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin: 40px 0 20px;
+        }
+
+        .values-list {
+            list-style: none;
+            margin: 20px 0 30px;
+        }
+
+        .values-list li {
+            margin-bottom: 25px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .values-list li strong {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .values-list li::before {
+            content: '→';
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .about-images {
             flex: 1;
             min-width: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             animation: fadeRight 1s ease-out both;
         }
 
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: var(--transition);
+        .about-image-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 200px;
+            position: relative;
         }
 
-        .about-image:hover img {
-            transform: scale(1.05);
+        .about-image-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .about-image-item:hover::after {
+            opacity: 1;
+        }
+
+        .about-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .about-image-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .about-image-item.large {
+            grid-column: span 2;
+            height: 280px;
         }
 
         /* Contact Section */
@@ -345,6 +406,16 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-item a:hover {
             color: var(--accent-color);
         }
 
@@ -505,10 +576,6 @@
             margin-bottom: 20px;
         }
 
-        .footer-logo span {
-            color: var(--accent-color);
-        }
-
         .footer-links {
             display: flex;
             flex-direction: column;
@@ -627,6 +694,14 @@
             .contact {
                 padding: 40px;
             }
+
+            .about-images {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image-item.large {
+                grid-column: auto;
+            }
         }
 
         @media (max-width: 768px) {
@@ -733,7 +808,7 @@
         <div class="container nav-container">
             <!-- With this: -->
             <a href="#" class="logo">
-                <img src="images/epiverse_logo.png" alt="EpiVerse Logo" class="logo-img">
+                <img src="epiverse_logo.png" alt="EpiVerse Logo" class="logo-img">
             </a>
 
             <div class="nav-links">
@@ -747,11 +822,7 @@
             </div>
         </div>
 
-        <!-- <div class="mobile-nav" id="mobileNav">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </div> -->
+
     </header>
 
     <!-- Hero Section -->
@@ -759,10 +830,10 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Connecting Diners, Elevating Experiences.</h1>
-                <div class="launching-soon pulse">Launching Soon – Get in Touch</div>
-                <p>EpiVerse is an innovative platform that leverages mobile technology to link users with unique
+                <div class="launching-soon pulse">Get in Touch</div>
+                <!-- <p>EpiVerse is an innovative platform that leverages mobile technology to link users with unique
                     nightlife and hospitality experiences.</p>
-                <a href="#contact" class="cta-button">Connect With Us</a>
+                <a href="#contact" class="cta-button">Connect With Us</a> -->
             </div>
         </div>
     </section>
@@ -773,16 +844,59 @@
             <h2 class="section-title">About Epiverse</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Revolutionizing the Restaurant Experience</h3>
-                    <p>EpiVerse is an innovative platform that leverages mobile technology to link users with unique
-                        nightlife and hospitality experiences. Our flagship product empowers users to discover and
-                        engage with nightlife and dining experiences, while providing restaurants and clubs with
-                        powerful tools for operations, customer engagement, and regulatory compliance.</p>
+                    <h3>Epiverse — The Operating System for Modern Food Businesses</h3>
+                    <p>Epiverse is a new-age restaurant technology company building a full-stack digital operating
+                        system for the food service industry. We believe food businesses don't just need another POS or
+                        SaaS tool — they need reliable digital infrastructure that connects operations, customer
+                        experience, growth, and compliance into one system. Epiverse is built to support cafés, QSRs,
+                        restaurants, and cloud kitchens as they scale — helping them run smoother day-to-day operations,
+                        reduce dependency on manual processes, and build direct relationships with their customers.</p>
+
+                    <h4 class="subheading">What We Stand For</h4>
+
+                    <ul class="values-list">
+                        <li>
+                            <strong>Infrastructure, not just software</strong>
+                            Designed to be the backbone of modern food businesses.
+                        </li>
+                        <li>
+                            <strong>Built for real operations</strong>
+                            Created around peak hours, staff constraints, and real-world workflows.
+                        </li>
+                        <li>
+                            <strong>Growth without dependency</strong>
+                            Helping businesses grow without relying entirely on aggregators or discounts.
+                        </li>
+                        <li>
+                            <strong>Simple, flexible, and future-ready</strong>
+                            Easy to start, powerful to scale.
+                        </li>
+                    </ul>
+
                     <a href="#contact" class="cta-button">Learn More</a>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-                        alt="Restaurant Experience">
+
+                <div class="about-images">
+                    <div class="about-image-item large">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                            alt="Restaurant Interior">
+                    </div>
+                    <div class="about-image-item">
+                        <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            alt="Professional Chef in Commercial Kitchen">
+                    </div>
+                    <div class="about-image-item">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Restaurant Kitchen">
+                    </div>
+                    <div class="about-image-item">
+                        <img src="https://images.pexels.com/photos/941869/pexels-photo-941869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            alt="Elegant Restaurant Table Setting">
+                    </div>
+                    <div class="about-image-item">
+                        <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            alt="Fresh Ingredients Preparation">
+                    </div>
                 </div>
             </div>
         </div>
@@ -815,7 +929,10 @@
                                 </div>
                                 <div>
                                     <h4>Phone</h4>
-                                    <p>+91 9175544471 / 9175544472</p>
+                                    <p>
+                                        <a href="tel:+919175544471">+91 9175544471</a> /
+                                        <a href="tel:+919175544472">9175544472</a>
+                                    </p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -824,7 +941,7 @@
                                 </div>
                                 <div>
                                     <h4>Email</h4>
-                                    <p>hello@epiverse.in</p>
+                                    <p><a href="mailto:hello@epiverse.in">hello@epiverse.in</a></p>
                                 </div>
                             </div>
                         </div>
@@ -837,11 +954,7 @@
                             <a href="#" class="social-link">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://www.instagram.com/pune.socialcompass?igsh=N2szbTk3am03Mndz"
-                                class="social-link" target="_blank">
+                            <a href="https://www.instagram.com/epiverse_biz/" class="social-link" target="_blank">
                                 <i class="fab fa-instagram"></i>
                             </a>
                             <a href="https://www.linkedin.com/company/epiverse/" class="social-link" target="_blank">
@@ -854,7 +967,7 @@
                     <div class="contact-form">
                         <h3>Send us a Message</h3>
 
-                        <form action="https://formsubmit.co/hello@epiverse.in" method="POST">
+                        <form action="https://formsubmit.co/parikshitwagh555@gmail.com" method="POST">
 
                             <!-- Hidden settings -->
                             <input type="hidden" name="_subject" value="New Message from EpiVerse Website">
@@ -899,6 +1012,7 @@
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -915,43 +1029,18 @@
                 <div>
                     <h4>Quick Links</h4>
                     <div class="footer-links">
-                        <a href="index.html#home">Home</a>
-                        <a href="index.html#about">About</a>
-                        <a href="index.html#contact">Contact</a>
-                        <a href="policy.html">Policy</a>
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                        <a href="policies.html">Policies</a>
                     </div>
                 </div>
-               <div>
-                    <h4>Contact Info</h4>
-                    <p style="margin-bottom: 10px;">
-                        <i class="fas fa-phone-alt"
-                            style="color: var(--accent-color); width: 25px; margin-right: 8px;"></i>
-                        <a href="tel:+919175544471"
-                            style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">+91
-                            91755 44471</a>
-                        <span style="color: var(--text-gray); margin: 0 5px;">/</span>
-                        <a href="tel:+919175544472"
-                            style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">+91
-                            91755
-                            44472</a>
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope"
-                            style="color: var(--accent-color); width: 25px; margin-right: 8px;"></i>
-                        <a href="mailto:hello@epiverse.in"
-                            style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">hello@epiverse.in</a>
-                    </p>
+                <div>
+                    <!-- Contact Info removed as requested -->
                 </div>
-                <style>
-                    /* Add this to your existing styles */
-                    .footer-content a:hover {
-                        color: var(--accent-color) !important;
-                        text-decoration: underline !important;
-                    }
-                </style>
             </div>
             <div class="copyright">
-                Copyright © 2026 Epiverse.in - All Rights Reserved.
+                Copyright © 2026 EpiVerse.in - All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -1014,7 +1103,7 @@
         }, observerOptions);
 
         document.addEventListener('DOMContentLoaded', function () {
-            const animatedElements = document.querySelectorAll('.about-text, .about-image, .contact, .contact-form');
+            const animatedElements = document.querySelectorAll('.about-text, .about-images, .contact, .contact-form');
             animatedElements.forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
@@ -1023,4 +1112,7 @@
             });
         });
     </script>
+
 </body>
+
+</html>
