@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What We Stand For | EpiVerse</title>
+
+    <link rel="icon" type="image/png" href="1762438251889.jfif">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles - Matching main site */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #ff6b35;
+            --text-light: #f5f5f5;
+            --text-gray: #b0b0b0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Background Image & Overlay */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bg-image {
+            background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            width: 100%;
+            height: 100%;
+            filter: brightness(0.3);
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
+        }
+
+        /* Header & Navigation - UPDATED: No hover effects, fixed size */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            transition: none; /* Removed transition */
+        }
+
+        /* Removed header.scrolled .logo-img - no size change */
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        /* REMOVED hover effects */
+        /* .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        } */
+
+        /* Active state for navigation */
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            flex-direction: column;
+            gap: 20px;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            margin-top: 120px;
+            padding: 40px 0 80px;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            padding: 10px 25px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .back-home:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Values Container */
+        .values-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .values-intro {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(255, 107, 53, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            animation: fadeUp 1s ease-out 0.2s both;
+        }
+
+        .values-intro h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .values-intro p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify; /* Added justify */
+            text-justify: inter-word;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            animation: fadeUp 1s ease-out 0.4s both;
+        }
+
+        .value-card {
+            background: rgba(22, 33, 62, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+            transform-origin: bottom;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .value-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .value-card:hover .value-icon {
+            background: var(--accent-color);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .value-card h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+            text-align: justify; /* Added justify */
+            text-justify: inter-word;
+        }
+
+        .value-quote {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .value-quote i {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-top: 80px;
+            padding: 60px 0;
+            background: rgba(255, 107, 53, 0.05);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin-top: 80px;
+            text-align: center;
+            animation: fadeUp 1s ease-out 0.8s both;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            margin: 0 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+            background-color: #ff5722;
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Footer - UPDATED: White logo and right-aligned Quick Links */
+        footer {
+            background-color: rgba(10, 15, 30, 0.9);
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-light); /* White color for entire logo */
+        }
+
+        .footer-logo span {
+            color: var(--text-light); /* White instead of accent color */
+        }
+
+        .footer-brand p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .footer-quick-links {
+            min-width: 200px;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .footer-quick-links h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-quick-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+            transform: scaleX(0.5);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .footer-quick-links:hover h4::after {
+            transform: scaleX(1);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            min-width: 250px;
+        }
+
+        .footer-contact h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-contact p {
+            color: var(--text-gray);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact i {
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        .footer-contact a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-quick-links {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                margin-top: 100px;
+            }
+
+            .page-header h1 {
+                font-size: 2.3rem;
+            }
+
+            .values-intro h2 {
+                font-size: 2rem;
+            }
+
+            .values-intro {
+                padding: 30px 20px;
+            }
+
+            .value-card {
+                padding: 30px;
+            }
+
+            .value-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-quick-links {
+                width: 100%;
+                text-align: left;
+                margin-left: 0;
+            }
+            
+            .footer-quick-links h4::after {
+                left: 0;
+                transform: scaleX(0.5);
+                transform-origin: left;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-img {
+                height: 45px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .value-card {
+                padding: 25px;
+            }
+
+            .value-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .cta-button {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Image -->
+    <div class="bg-container">
+        <div class="bg-image"></div>
+        <div class="bg-overlay"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="epiverse_logo.png" alt="EpiVerse Logo" class="logo-img">
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <a href="index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+                <h1>What We Stand For</h1>
+                <p>Our core values that drive everything we do at EpiVerse</p>
+            </div>
+
+            <div class="values-container">
+                <!-- Intro Section -->
+                <div class="values-intro">
+                    <h2>Building the Future of Food Business</h2>
+                    <p>At EpiVerse, we're not just creating software, we're building the digital infrastructure that will power the next generation of food businesses. Our values reflect our commitment to our partners and their success.</p>
+                </div>
+
+                <!-- Values Grid -->
+                <div class="values-grid">
+                    <!-- Value 1: Infrastructure -->
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Infrastructure, not just software</h3>
+                        <p>Designed to be the backbone of modern food businesses. We provide the essential foundation that restaurants need to operate efficiently, scale seamlessly, and thrive in a competitive market.</p>
+                        <div class="value-quote">
+                            <i class="fas fa-quote-left"></i> Built to last, designed to scale
+                        </div>
+                    </div>
+
+                    <!-- Value 2: Real Operations -->
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Built for real operations</h3>
+                        <p>Created around peak hours, staff constraints, and real-world workflows. Every feature is tested in actual restaurant environments to ensure it works when you need it most.</p>
+                        <div class="value-quote">
+                            <i class="fas fa-quote-left"></i> Tested in the trenches, proven under pressure
+                        </div>
+                    </div>
+
+                    <!-- Value 3: Growth Without Dependency -->
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Growth without dependency</h3>
+                        <p>Helping businesses grow without relying entirely on aggregators or discounts. We empower you to build direct relationships with your customers and own your growth journey.</p>
+                        <div class="value-quote">
+                            <i class="fas fa-quote-left"></i> Your success, your way, your brand
+                        </div>
+                    </div>
+
+                    <!-- Value 4: Future-Ready -->
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Simple, flexible, and future-ready</h3>
+                        <p>Easy to start, powerful to scale. Our platform grows with you, adapting to your changing needs while maintaining the simplicity that makes it accessible to everyone.</p>
+                        <div class="value-quote">
+                            <i class="fas fa-quote-left"></i> Start smart, scale strong
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - UPDATED with white logo and right-aligned Quick Links -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <!-- Left side - Brand with white logo -->
+                <div class="footer-brand">
+                    <div class="footer-logo">Epi<span>Verse</span></div>
+                    <p>Connecting Diners, Elevating Experiences.</p>
+                </div>
+                
+                <!-- Quick Links - slightly right -->
+                <div class="footer-quick-links">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html#home">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="index.html#contact">Contact</a>
+                        <a href="policies.html">Policies</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Copyright -->
+            <div class="copyright">
+                Copyright © 2026 EpiVerse.in - All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Header scroll effect - only adds shadow, no size change
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Update active navigation based on scroll position
+            updateActiveNavOnScroll();
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileNav = document.getElementById('mobileNav');
+
+        if (mobileToggle && mobileNav) {
+            mobileToggle.addEventListener('click', function () {
+                mobileNav.classList.toggle('active');
+                mobileToggle.innerHTML = mobileNav.classList.contains('active')
+                    ? '<i class="fas fa-times"></i>'
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            const mobileLinks = document.querySelectorAll('.mobile-nav a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    // Update active state
+                    document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    link.classList.add('active');
+                    
+                    // Also update desktop nav if exists
+                    const desktopLink = document.querySelector(`.nav-links a[href="${link.getAttribute('href')}"]`);
+                    if (desktopLink) desktopLink.classList.add('active');
+                });
+            });
+        }
+
+        // Function to update active navigation based on scroll position
+        function updateActiveNavOnScroll() {
+            // This function is for the index page, not needed here
+            // But keeping it for consistency
+        }
+
+        // Click event for navigation items
+        document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Don't prevent default - let it navigate to index.html
+                // Just update active state
+                document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 500) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const animatedElements = document.querySelectorAll('.value-card, .values-intro, .stats-section, .cta-section');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+images/epiverse_logo.png
