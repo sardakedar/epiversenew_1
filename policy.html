@@ -78,7 +78,7 @@
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%);
         }
 
-        /* Header & Navigation - Exact same as index */
+        /* Header & Navigation - UPDATED: No hover effects, fixed size */
         header {
             position: fixed;
             top: 0;
@@ -87,12 +87,11 @@
             background-color: rgba(26, 26, 46, 0.9);
             backdrop-filter: blur(10px);
             padding: 20px 0;
-            transition: var(--transition);
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         header.scrolled {
-            padding: 15px 0;
             box-shadow: var(--shadow);
         }
 
@@ -112,15 +111,17 @@
             text-decoration: none;
         }
 
+        .logo span {
+            color: var(--accent-color);
+        }
+
         .logo-img {
             height: 60px;
             width: auto;
-            transition: var(--transition);
+            transition: none;
         }
 
-        header.scrolled .logo-img {
-            height: 40px;
-        }
+        /* Removed header.scrolled .logo-img - no size change */
 
         .nav-links {
             display: flex;
@@ -136,7 +137,8 @@
             position: relative;
         }
 
-        .nav-links a:hover {
+        /* REMOVED hover effects */
+        /* .nav-links a:hover {
             color: var(--accent-color);
         }
 
@@ -153,6 +155,21 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        } */
+
+        /* Active state for navigation */
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
         }
 
         .mobile-toggle {
@@ -189,6 +206,10 @@
             font-size: 1.2rem;
             padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
         }
 
         /* Main Content */
@@ -341,6 +362,8 @@
             line-height: 1.8;
             padding-left: 20px;
             border-left: 3px solid var(--accent-color);
+            text-align: justify; /* Added justify */
+            text-justify: inter-word;
         }
 
         .policy-section p strong {
@@ -358,6 +381,8 @@
             margin-bottom: 15px;
             padding-left: 30px;
             position: relative;
+            text-align: justify; /* Added justify */
+            text-justify: inter-word;
         }
 
         .policy-list li::before {
@@ -380,6 +405,8 @@
             margin-bottom: 10px;
             padding-left: 25px;
             position: relative;
+            text-align: justify; /* Added justify */
+            text-justify: inter-word;
         }
 
         .bullet-list li::before {
@@ -455,7 +482,7 @@
             color: #ff5722;
         }
 
-        /* Footer - Exact same as index */
+        /* Footer - UPDATED: White logo and right-aligned Quick Links */
         footer {
             background-color: rgba(10, 15, 30, 0.9);
             padding: 60px 0 30px;
@@ -465,40 +492,114 @@
         .footer-content {
             display: flex;
             justify-content: space-between;
+            align-items: flex-start;
             flex-wrap: wrap;
             gap: 40px;
             margin-bottom: 40px;
         }
 
+        .footer-brand {
+            flex: 1;
+            min-width: 250px;
+        }
+
         .footer-logo {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            color: var(--text-light);
         }
 
         .footer-logo span {
-            color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .footer-brand p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .footer-quick-links {
+            min-width: 200px;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .footer-quick-links h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-quick-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+            transform: scaleX(0.5);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .footer-quick-links:hover h4::after {
+            transform: scaleX(1);
         }
 
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .footer-links a {
             color: var(--text-gray);
             text-decoration: none;
             transition: var(--transition);
+            display: inline-block;
         }
 
         .footer-links a:hover {
             color: var(--accent-color);
+            transform: translateX(5px);
         }
 
-        .footer-content a:hover {
-            color: var(--accent-color) !important;
-            text-decoration: underline !important;
+        .footer-contact {
+            min-width: 250px;
+        }
+
+        .footer-contact h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-contact p {
+            color: var(--text-gray);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact i {
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        .footer-contact a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent-color);
         }
 
         .copyright {
@@ -569,6 +670,11 @@
             .policy-container {
                 padding: 40px;
             }
+            
+            .footer-quick-links {
+                margin-left: 0;
+                margin-right: 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -606,15 +712,23 @@
             .contact-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .footer-quick-links {
+                width: 100%;
+                text-align: left;
+                margin-left: 0;
+            }
+            
+            .footer-quick-links h4::after {
+                left: 0;
+                transform: scaleX(0.5);
+                transform-origin: left;
+            }
         }
 
         @media (max-width: 576px) {
             .logo-img {
                 height: 45px;
-            }
-
-            header.scrolled .logo-img {
-                height: 35px;
             }
 
             .page-header h1 {
@@ -644,7 +758,7 @@
         <div class="bg-overlay"></div>
     </div>
 
-    <!-- Header - Exactly same as index -->
+    <!-- Header - UPDATED with no hover effects -->
     <header id="header">
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -652,9 +766,9 @@
             </a>
 
             <div class="nav-links">
-                <a href="index.html#home">Home</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
             </div>
 
             <div class="mobile-toggle" id="mobileToggle">
@@ -663,9 +777,9 @@
         </div>
 
         <div class="mobile-nav" id="mobileNav">
-            <a href="index.html#home">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#about" class="nav-link">About</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
         </div>
     </header>
 
@@ -682,7 +796,7 @@
                 <p>Transparency is at the heart of everything we do. Please review our policies carefully.</p>
             </div>
 
-            <!-- Policy Navigation Tabs - Only 3 tabs, Disclaimer removed -->
+            <!-- Policy Navigation Tabs -->
             <div class="policy-tabs">
                 <a href="#terms" class="policy-tab active">
                     <i class="fas fa-file-contract"></i>
@@ -808,7 +922,7 @@
                     <p><strong>Your Rights:</strong> You may request access, correction, or deletion of your data by contacting <strong style="color: var(--accent-color);">hello@epiverse.in</strong></p>
                 </section>
 
-                <!-- DISCLAIMER SECTION - Kept the content but removed from tabs -->
+                <!-- DISCLAIMER SECTION -->
                 <section id="disclaimer" class="policy-section">
                     <h2 class="section-title">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -847,15 +961,18 @@
         </div>
     </main>
 
-    <!-- Footer - Exactly same as index -->
+    <!-- Footer - UPDATED with white logo and right-aligned Quick Links -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div>
+                <!-- Left side - Brand with white logo -->
+                <div class="footer-brand">
                     <div class="footer-logo">Epi<span>Verse</span></div>
                     <p>Connecting Diners, Elevating Experiences.</p>
                 </div>
-                <div>
+                
+                <!-- Quick Links - slightly right -->
+                <div class="footer-quick-links">
                     <h4>Quick Links</h4>
                     <div class="footer-links">
                         <a href="index.html#home">Home</a>
@@ -864,29 +981,13 @@
                         <a href="policies.html">Policies</a>
                     </div>
                 </div>
-                <div>
-                    <h4>Contact Info</h4>
-                    <p style="margin-bottom: 10px;">
-                        <i class="fas fa-phone-alt"
-                            style="color: var(--accent-color); width: 25px; margin-right: 8px;"></i>
-                        <a href="tel:+919175544471"
-                            style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">+91
-                            91755 44471</a>
-                        <span style="color: var(--text-gray); margin: 0 5px;">/</span>
-                        <a href="tel:+919175544472"
-                            style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">+91
-                            91755 44472</a>
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope"
-                            style="color: var(--accent-color); width: 25px; margin-right: 8px;"></i>
-                        <a href="mailto:hello@epiverse.in"
-                            style="color: var(--text-gray); text-decoration: none; transition: var(--transition);">hello@epiverse.in</a>
-                    </p>
-                </div>
+                
+                
             </div>
+            
+            <!-- Copyright -->
             <div class="copyright">
-                Copyright © 2026 Epiverse.in - All Rights Reserved.
+                Copyright © 2026 EpiVerse.in - All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -897,7 +998,7 @@
     </button>
 
     <script>
-        // Header scroll effect - Same as index
+        // Header scroll effect - only adds shadow, no size change
         window.addEventListener('scroll', function () {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
@@ -907,7 +1008,7 @@
             }
         });
 
-        // Mobile menu toggle - Same as index
+        // Mobile menu toggle
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileNav = document.getElementById('mobileNav');
 
@@ -928,7 +1029,7 @@
             });
         }
 
-        // Policy tab active state and smooth scrolling - FIXED VERSION
+        // Policy tab active state and smooth scrolling
         const policyTabs = document.querySelectorAll('.policy-tab');
         const sections = document.querySelectorAll('.policy-section');
 
@@ -946,7 +1047,7 @@
 
                 if (targetSection) {
                     const headerHeight = document.getElementById('header').offsetHeight;
-                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20; // 20px extra padding
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
                     
                     window.scrollTo({
                         top: targetPosition,
@@ -956,13 +1057,12 @@
             });
         });
 
-        // Update active tab on scroll with improved accuracy
+        // Update active tab on scroll
         window.addEventListener('scroll', function () {
             let current = '';
             const headerHeight = document.getElementById('header').offsetHeight;
-            const scrollPos = window.scrollY + headerHeight + 50; // Offset for better detection
+            const scrollPos = window.scrollY + headerHeight + 50;
             
-            // Check each section to see which one is currently in view
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 50;
                 const sectionBottom = sectionTop + section.offsetHeight;
@@ -972,7 +1072,6 @@
                 }
             });
 
-            // Update active tab (only for tabs that exist)
             policyTabs.forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.getAttribute('href') === `#${current}`) {
@@ -999,12 +1098,11 @@
             });
         });
 
-        // Handle URL hash on page load with improved accuracy
+        // Handle URL hash on page load
         window.addEventListener('load', function () {
             if (window.location.hash) {
                 const targetSection = document.querySelector(window.location.hash);
                 if (targetSection) {
-                    // Set active tab only if the hash matches a tab
                     policyTabs.forEach(tab => {
                         tab.classList.remove('active');
                         if (tab.getAttribute('href') === window.location.hash) {
@@ -1028,4 +1126,3 @@
 </body>
 
 </html>
-
