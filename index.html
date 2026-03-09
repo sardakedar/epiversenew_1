@@ -8,7 +8,6 @@
 
     <link rel="icon" type="image/png" href="1762438251889.jfif">
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and Base Styles */
@@ -31,6 +30,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -38,6 +38,8 @@
             color: var(--text-light);
             overflow-x: hidden;
             line-height: 1.6;
+            width: 100%;
+            position: relative;
         }
 
         .container {
@@ -76,7 +78,7 @@
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(22, 33, 62, 0.8) 100%);
         }
 
-        /* Header & Navigation - No hover effects */
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
@@ -84,7 +86,7 @@
             z-index: 1000;
             background-color: rgba(26, 26, 46, 0.9);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 15px 0;
             transition: background-color 0.4s ease, box-shadow 0.4s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
@@ -97,25 +99,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-light);
             text-decoration: none;
         }
 
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            color: var(--accent-color);
+        /* Logo Image Styling */
+        .logo-img {
+            height: 100px;
+            width: auto;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .nav-links {
@@ -126,65 +124,103 @@
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 1.1rem;
             transition: var(--transition);
             position: relative;
+            padding: 5px 0;
         }
 
-        /* Active state for navigation - only changes when clicked/active */
+        /* Hover effect for desktop navigation */
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Active state for navigation */
         .nav-links a.active {
             color: var(--accent-color);
         }
 
         .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
             width: 100%;
-            height: 2px;
-            background-color: var(--accent-color);
         }
 
         .mobile-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+            z-index: 1001;
         }
 
+        .mobile-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Navigation - FIXED */
         .mobile-nav {
             display: none;
             position: fixed;
-            top: 80px;
+            top: 0;
             left: 0;
             width: 100%;
-            background-color: var(--primary-color);
-            padding: 20px;
-            box-shadow: var(--shadow);
+            height: 100vh;
+            background-color: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 100px 20px 40px;
             flex-direction: column;
-            gap: 20px;
-            transform: translateY(-100%);
+            gap: 25px;
+            transform: translateX(100%);
             opacity: 0;
-            transition: var(--transition);
-            z-index: 999;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            z-index: 1000;
+            overflow-y: auto;
         }
 
         .mobile-nav.active {
-            transform: translateY(0);
+            display: flex !important;
+            transform: translateX(0);
             opacity: 1;
         }
 
         .mobile-nav a {
             color: var(--text-light);
             text-decoration: none;
-            font-size: 1.2rem;
-            padding: 10px 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 15px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
         }
 
         .mobile-nav a.active {
             color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
         }
 
         /* Hero Section */
@@ -194,15 +230,17 @@
             align-items: center;
             position: relative;
             padding-top: 100px;
+            width: 100%;
         }
 
         .hero-content {
             max-width: 800px;
             animation: fadeUp 1s ease-out;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 5vw, 4rem);
             margin-bottom: 20px;
             line-height: 1.2;
             background: linear-gradient(to right, #fff, var(--accent-color));
@@ -213,7 +251,7 @@
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
             color: var(--text-gray);
             margin-bottom: 30px;
             animation: fadeUp 1s ease-out 0.4s both;
@@ -255,12 +293,13 @@
 
         /* About Section */
         .section {
-            padding: 100px 0;
+            padding: clamp(60px, 10vw, 100px) 0;
+            width: 100%;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 60px;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: clamp(40px, 8vw, 60px);
             text-align: center;
             position: relative;
         }
@@ -280,7 +319,7 @@
         .about-content {
             display: flex;
             align-items: flex-start;
-            gap: 60px;
+            gap: clamp(30px, 5vw, 60px);
             flex-wrap: wrap;
         }
 
@@ -291,48 +330,17 @@
         }
 
         .about-text h3 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             margin-bottom: 20px;
             color: var(--accent-color);
         }
 
         .about-text p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             margin-bottom: 30px;
             color: var(--text-gray);
-        }
-
-        .about-text .subheading {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin: 40px 0 20px;
-        }
-
-        .values-list {
-            list-style: none;
-            margin: 20px 0 30px;
-        }
-
-        .values-list li {
-            margin-bottom: 25px;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .values-list li strong {
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .values-list li::before {
-            content: '→';
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            position: absolute;
-            left: 0;
-            top: 2px;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         /* Carousel Styles */
@@ -341,7 +349,7 @@
             min-width: 300px;
             position: relative;
             animation: fadeRight 1s ease-out both;
-            height: 500px;
+            height: clamp(400px, 50vw, 500px);
         }
 
         .carousel-container {
@@ -388,15 +396,15 @@
 
         .carousel-caption {
             position: absolute;
-            bottom: 30px;
-            left: 30px;
+            bottom: clamp(20px, 4vw, 30px);
+            left: clamp(20px, 4vw, 30px);
             color: white;
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
             font-weight: 600;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             z-index: 3;
             background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 30px;
             backdrop-filter: blur(5px);
             border-left: 3px solid var(--accent-color);
@@ -407,13 +415,13 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 5vw, 50px);
+            height: clamp(40px, 5vw, 50px);
             background: rgba(255, 107, 53, 0.7);
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             cursor: pointer;
             transition: var(--transition);
             z-index: 10;
@@ -429,26 +437,27 @@
         }
 
         .carousel-btn.prev {
-            left: 20px;
+            left: 10px;
         }
 
         .carousel-btn.next {
-            right: 20px;
+            right: 10px;
         }
 
         /* Carousel Indicators */
         .carousel-indicators {
             position: absolute;
-            bottom: 20px;
-            right: 30px;
+            bottom: 15px;
+            right: 15px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             z-index: 10;
+            flex-wrap: wrap;
         }
 
         .indicator {
-            width: 12px;
-            height: 12px;
+            width: clamp(10px, 2vw, 12px);
+            height: clamp(10px, 2vw, 12px);
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             border: none;
@@ -469,25 +478,26 @@
         .contact {
             background-color: rgba(22, 33, 62, 0.7);
             border-radius: 20px;
-            padding: 60px;
+            padding: clamp(30px, 5vw, 60px);
             margin-top: 50px;
             box-shadow: var(--shadow);
             animation: fadeUp 1s ease-out both;
+            width: 100%;
         }
 
         .contact-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 60px;
+            gap: clamp(30px, 5vw, 60px);
         }
 
         .contact-info {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
         }
 
         .contact-info h3 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             margin-bottom: 30px;
             color: var(--accent-color);
         }
@@ -506,43 +516,57 @@
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 5vw, 50px);
+            height: clamp(40px, 5vw, 50px);
             background-color: rgba(255, 107, 53, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--accent-color);
+            flex-shrink: 0;
         }
 
         .contact-item a {
             color: var(--text-gray);
             text-decoration: none;
             transition: var(--transition);
+            word-break: break-word;
         }
 
         .contact-item a:hover {
             color: var(--accent-color);
         }
 
+        .contact-item h4 {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            color: var(--text-gray);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            word-break: break-word;
+        }
+
         .social-links {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .social-link {
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 5vw, 50px);
+            height: clamp(40px, 5vw, 50px);
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             transition: var(--transition);
         }
 
@@ -557,13 +581,15 @@
             gap: 10px;
             background-color: #25D366;
             color: white;
-            padding: 15px 30px;
+            padding: 12px 25px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1rem);
             margin-top: 20px;
             transition: var(--transition);
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            width: fit-content;
         }
 
         .whatsapp-button:hover {
@@ -575,11 +601,11 @@
         /* Contact Form Styles */
         .contact-form {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
         }
 
         .contact-form h3 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             margin-bottom: 30px;
             color: var(--accent-color);
         }
@@ -657,17 +683,20 @@
         .form-row {
             display: flex;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         .form-row .form-group {
             flex: 1;
+            min-width: 200px;
         }
 
-        /* Footer - White logo */
+        /* Footer */
         footer {
             background-color: rgba(10, 15, 30, 0.9);
-            padding: 60px 0 30px;
+            padding: clamp(40px, 8vw, 60px) 0 30px;
             margin-top: 60px;
+            width: 100%;
         }
 
         .footer-content {
@@ -685,7 +714,7 @@
         }
 
         .footer-logo {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 700;
             margin-bottom: 15px;
             color: var(--text-light);
@@ -703,8 +732,6 @@
 
         .footer-quick-links {
             min-width: 200px;
-            margin-left: auto;
-            margin-right: 20px;
         }
 
         .footer-quick-links h4 {
@@ -815,10 +842,6 @@
 
         /* Responsive Styles */
         @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-
             .nav-links {
                 display: none;
             }
@@ -827,62 +850,44 @@
                 display: block;
             }
 
-            .mobile-nav {
-                display: flex;
-            }
-
-            .contact {
-                padding: 40px;
-            }
-
-            .about-carousel {
-                height: 400px;
+            .logo-img {
+                height: 80px;
             }
 
             .footer-quick-links {
                 margin-left: 0;
-                margin-right: 0;
             }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            header {
+                padding: 10px 0;
             }
 
-            .hero p {
-                font-size: 1.2rem;
+            .logo-img {
+                height: 70px;
             }
 
-            .section {
-                padding: 70px 0;
-            }
-
-            .section-title {
-                font-size: 2rem;
+            .hero {
+                padding-top: 80px;
             }
 
             .about-content {
-                gap: 40px;
+                flex-direction: column;
+            }
+
+            .about-carousel {
+                width: 100%;
+                height: 400px;
             }
 
             .contact-content {
-                gap: 40px;
+                flex-direction: column;
             }
 
             .form-row {
                 flex-direction: column;
                 gap: 0;
-            }
-
-            .about-carousel {
-                height: 350px;
-            }
-
-            .carousel-caption {
-                font-size: 1rem;
-                left: 20px;
-                bottom: 20px;
             }
 
             .footer-content {
@@ -892,27 +897,29 @@
 
             .footer-quick-links {
                 width: 100%;
-                text-align: left;
             }
 
-            .footer-quick-links h4::after {
-                left: 0;
-                transform: scaleX(0.5);
-                transform-origin: left;
+            .carousel-caption {
+                max-width: 80%;
             }
         }
 
         @media (max-width: 576px) {
+            .logo-img {
+                height: 60px;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
 
-            .contact {
-                padding: 30px 20px;
+            .launching-soon {
+                font-size: 0.9rem;
+                padding: 8px 20px;
             }
 
-            .footer-content {
-                flex-direction: column;
+            .contact {
+                padding: 25px 15px;
             }
 
             .about-carousel {
@@ -920,27 +927,38 @@
             }
 
             .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .carousel-caption {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+
+            .whatsapp-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
             }
         }
 
-        /* Logo Image Styling */
-        .logo-img {
-            height: 100px;
-            width: auto;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 380px) {
             .logo-img {
-                height: 45px;
+                height: 50px;
             }
-        }
 
-        @media (max-width: 576px) {
-            .logo-img {
-                height: 40px;
+            .about-carousel {
+                height: 250px;
+            }
+
+            .carousel-caption {
+                max-width: 90%;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -956,7 +974,6 @@
     <!-- Header -->
     <header id="header">
         <div class="container nav-container">
-            <!-- With this: -->
             <a href="#" class="logo">
                 <img src="images/epiverse_logo.png" alt="EpiVerse Logo" class="logo-img">
             </a>
@@ -985,9 +1002,6 @@
             <div class="hero-content">
                 <h1>Connecting Diners, Elevating Experiences.</h1>
                 <div class="launching-soon pulse">Get in Touch</div>
-                <!-- <p>EpiVerse is an innovative platform that leverages mobile technology to link users with unique
-                    nightlife and hospitality experiences.</p>
-                <a href="#contact" class="cta-button">Connect With Us</a> -->
             </div>
         </div>
     </section>
@@ -999,35 +1013,32 @@
             <div class="about-content">
                 <div class="about-text">
                     <h3>Epiverse — The Operating System for Modern Food Businesses</h3>
-                    <p style="text-align: justify; text-justify: inter-word;">Epiverse is a new-age restaurant
-                        technology company building a full-stack digital operating
+                    <p>Epiverse is a new-age restaurant technology company building a full-stack digital operating
                         system for the food service industry. We believe food businesses don't just need another POS or
                         SaaS tool, they need reliable digital infrastructure that connects operations, customer
                         experience, growth, and compliance into one system. Epiverse is built to support cafés, QSRs,
                         restaurants, and cloud kitchens as they scale, helping them run smoother day-to-day operations,
                         reduce dependency on manual processes, and build direct relationships with their customers.</p>
 
-
-                    <a href="about.html" class="cta-button">Learn More</a>
+                    <a href="#contact" class="cta-button">Learn More</a>
                 </div>
 
                 <!-- Carousel with navigation -->
                 <div class="about-carousel">
                     <div class="carousel-container" id="aboutCarousel">
                         <div class="carousel-slide active">
-                            <img src="images/PHOTO-2026-03-05-17-24-14 (1).jpg"
-                                alt="Restaurant Interior">
-                            <!-- <div class="carousel-caption">Interior with Warm Lighting</div> -->
+                            <img src="images/PHOTO-2026-03-05-17-24-14 (1).jpg" alt="Restaurant Interior">
+                            <div class="carousel-caption">Interior with Warm Lighting</div>
                         </div>
                         <div class="carousel-slide">
                             <img src="images/PHOTO-2026-03-05-17-24-14 (2).jpg"
                                 alt="Professional Chef">
-                            <!-- <div class="carousel-caption">Expert Culinary Team</div> -->
+                            <div class="carousel-caption">Expert Culinary Team</div>
                         </div>
                         <div class="carousel-slide">
                             <img src="images/PHOTO-2026-03-05-17-24-14.jpg"
                                 alt="Modern Restaurant Interior">
-                            <!-- <div class="carousel-caption">Elegant Dining Spaces</div> -->
+                            <div class="carousel-caption">Elegant Dining Spaces</div>
                         </div>
                         <!-- <div class="carousel-slide">
                             <img src="https://images.pexels.com/photos/941869/pexels-photo-941869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -1124,8 +1135,6 @@
                         <h3>Send us a Message</h3>
 
                         <form action="https://formsubmit.co/hello@epiverse.in" method="POST">
-
-                            <!-- Hidden settings -->
                             <input type="hidden" name="_subject" value="New Message from EpiVerse Website">
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_template" value="table">
@@ -1168,23 +1177,20 @@
                             </button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer - White logo -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <!-- Left side - Brand with white logo -->
                 <div class="footer-brand">
                     <div class="footer-logo">Epi<span>Verse</span></div>
                     <p>Connecting Diners, Elevating Experiences.</p>
                 </div>
 
-                <!-- Right side - Quick Links -->
                 <div class="footer-quick-links">
                     <h4>Quick Links</h4>
                     <div class="footer-links">
@@ -1196,7 +1202,6 @@
                 </div>
             </div>
 
-            <!-- Copyright -->
             <div class="copyright">
                 Copyright © 2026 EpiVerse.in - All Rights Reserved.
             </div>
@@ -1204,7 +1209,7 @@
     </footer>
 
     <script>
-        // Header scroll effect - only adds shadow
+        // Header scroll effect
         window.addEventListener('scroll', function () {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
@@ -1212,59 +1217,88 @@
             } else {
                 header.classList.remove('scrolled');
             }
-
-            // Update active navigation based on scroll position
             updateActiveNavOnScroll();
         });
 
-        // Mobile menu toggle
+        // Mobile menu toggle - FIXED AND WORKING
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileNav = document.getElementById('mobileNav');
 
         if (mobileToggle && mobileNav) {
-            mobileToggle.addEventListener('click', function () {
+            mobileToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle active class
                 mobileNav.classList.toggle('active');
-                mobileToggle.innerHTML = mobileNav.classList.contains('active')
-                    ? '<i class="fas fa-times"></i>'
-                    : '<i class="fas fa-bars"></i>';
+                
+                // Change icon
+                const icon = this.querySelector('i');
+                if (mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
             });
 
+            // Close mobile nav when clicking on a link
             const mobileLinks = document.querySelectorAll('.mobile-nav a');
             mobileLinks.forEach(link => {
-                link.addEventListener('click', function () {
-                    mobileNav.classList.remove('active');
-                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active class
+                        document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        // Also update desktop nav
+                        const desktopLink = document.querySelector(`.nav-links a[href="${targetId}"]`);
+                        if (desktopLink) desktopLink.classList.add('active');
+                        
+                        // Close menu
+                        mobileNav.classList.remove('active');
+                        const icon = mobileToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                    }
                 });
             });
-        }
 
-        // Function to update active navigation based on scroll position
-        function updateActiveNavOnScroll() {
-            const sections = document.querySelectorAll('section');
-            const navItems = document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link');
-
-            let current = '';
-            const scrollPosition = window.scrollY + 100;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href') === `#${current}`) {
-                    item.classList.add('active');
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', function (e) {
+                if (mobileNav.classList.contains('active') && 
+                    !mobileNav.contains(e.target) && 
+                    !mobileToggle.contains(e.target)) {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    document.body.style.overflow = '';
                 }
             });
         }
 
-        // Click event for navigation items
-        document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
+        // Desktop navigation
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
 
@@ -1285,15 +1319,34 @@
                         item.classList.remove('active');
                     });
                     this.classList.add('active');
-
-                    // Close mobile nav if open
-                    if (mobileNav && mobileNav.classList.contains('active')) {
-                        mobileNav.classList.remove('active');
-                        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
                 }
             });
         });
+
+        // Update active navigation on scroll
+        function updateActiveNavOnScroll() {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link');
+            
+            let current = '';
+            const scrollPosition = window.scrollY + 150;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
 
         // Carousel functionality
         const slides = document.querySelectorAll('.carousel-slide');
@@ -1307,11 +1360,9 @@
             else if (index < 0) currentSlide = slides.length - 1;
             else currentSlide = index;
 
-            // Update slides
             slides.forEach(slide => slide.classList.remove('active'));
             slides[currentSlide].classList.add('active');
 
-            // Update indicators
             indicators.forEach((indicator, i) => {
                 if (i === currentSlide) {
                     indicator.classList.add('active');
@@ -1321,30 +1372,16 @@
             });
         }
 
-        // Event listeners for carousel buttons
         if (prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => {
-                showSlide(currentSlide - 1);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                showSlide(currentSlide + 1);
-            });
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
         }
 
-        // Indicator clicks
         indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                showSlide(index);
-            });
+            indicator.addEventListener('click', () => showSlide(index));
         });
 
-        // Auto advance carousel every 5 seconds (optional - remove if you don't want auto-play)
-        // setInterval(() => {
-        //     showSlide(currentSlide + 1);
-        // }, 5000);
-
-        // Simple loading animation on form submit (works with FormSubmit)
+        // Form submission
         const form = document.querySelector("form");
         if (form) {
             form.addEventListener("submit", function () {
@@ -1378,23 +1415,22 @@
                 observer.observe(el);
             });
 
-            // Set initial active nav based on URL or default to home
-            if (window.location.hash) {
-                const activeLink = document.querySelector(`.nav-links a[href="${window.location.hash}"], .mobile-nav a[href="${window.location.hash}"]`);
-                if (activeLink) {
-                    document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    activeLink.classList.add('active');
-                }
-            } else {
-                // Default to home active
-                const homeLink = document.querySelector('.nav-links a[href="#home"]');
-                if (homeLink) homeLink.classList.add('active');
+            // Set initial active nav
+            const homeLink = document.querySelector('.nav-links a[href="#home"]');
+            if (homeLink) homeLink.classList.add('active');
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992 && mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
             }
         });
     </script>
-
 </body>
 
 </html>
