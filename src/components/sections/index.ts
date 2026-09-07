@@ -1,0 +1,15 @@
+export { default as HeroSection } from './HeroSection';
+export { default as BenefitsStrip } from './BenefitsStrip';
+export { default as StatsStrip } from './StatsStrip';
+export { default as HowItWorks } from './HowItWorks';
+export { default as PlatformEcosystem } from './PlatformEcosystem';
+export { default as PlatformModules } from './PlatformModules';
+export { default as FeatureCloudPOS } from './FeatureCloudPOS';
+export { default as FeatureInventory } from './FeatureInventory';
+export { default as ProblemsSolutions } from './ProblemsSolutions';
+export { default as BuiltForIndia } from './BuiltForIndia';
+export { default as Testimonial } from './Testimonial';
+export { default as Integrations } from './Integrations';
+export { default as PricingSection } from './PricingSection';
+export { default as Philosophy } from './Philosophy';
+export { default as FinalCta } from './FinalCta';

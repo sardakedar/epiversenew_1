@@ -1,0 +1,62 @@
+[
+  {
+    "alt": "Zomato",
+    "type": "image/png",
+    "filename": "zomato.png"
+  },
+  {
+    "alt": "Swiggy",
+    "type": "image/png",
+    "filename": "swiggy.png"
+  },
+  {
+    "alt": "UrbanPiper",
+    "type": "image/png",
+    "filename": "urbanpiper.png"
+  },
+  {
+    "alt": "Razorpay",
+    "type": "image/png",
+    "filename": "razorpay.png"
+  },
+  {
+    "alt": "HDFC SmartGateway",
+    "type": "image/png",
+    "filename": "hdfc-smartgateway.png"
+  },
+  {
+    "alt": "Google Ads",
+    "type": "image/png",
+    "filename": "google-ads.png"
+  },
+  {
+    "alt": "Meta",
+    "type": "image/png",
+    "filename": "meta.png"
+  },
+  {
+    "alt": "WhatsApp Business",
+    "type": "image/png",
+    "filename": "whatsapp-business.png"
+  },
+  {
+    "alt": "Zoho",
+    "type": "image/png",
+    "filename": "zoho.png"
+  },
+  {
+    "alt": "AWS",
+    "type": "image/png",
+    "filename": "aws.png"
+  },
+  {
+    "alt": "Microsoft",
+    "type": "image/png",
+    "filename": "microsoft.png"
+  },
+  {
+    "alt": "IDFC First Bank",
+    "type": "image/png",
+    "filename": "idfc-first-bank.png"
+  }
+]

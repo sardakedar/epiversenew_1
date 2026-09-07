@@ -1,0 +1,70 @@
+export const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'EpiVerse',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, Android, iOS',
+  url: 'https://epiverse.in',
+  logo: 'https://epiverse.in/logo.png',
+  description:
+    "India's restaurant operating system: cloud POS, UPI billing, GST invoicing, Zomato & Swiggy sync, inventory management and guest profiles for cafés, QSRs, cloud kitchens and fine dining.",
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Starter',
+      price: '1999',
+      priceCurrency: 'INR',
+      priceValidUntil: '2026-12-31',
+      description: 'Cloud POS for single-outlet cafés and QSRs',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Growth',
+      price: '3999',
+      priceCurrency: 'INR',
+      priceValidUntil: '2026-12-31',
+      description: 'Full platform for growing restaurants and small chains',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Enterprise',
+      price: '0',
+      priceCurrency: 'INR',
+      description: 'Custom pricing for multi-outlet chains and cloud kitchen brands',
+    },
+  ],
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', reviewCount: '47' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'EIPL',
+    url: 'https://epiverse.in',
+    logo: 'https://epiverse.in/logo.png',
+    sameAs: [
+      'https://www.linkedin.com/company/epiverse-in',
+      'https://www.instagram.com/epiverse.in',
+      'https://twitter.com/epiverse_in',
+    ],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+91-91755-44471',
+        contactType: 'sales',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi'],
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: '+91-91755-44472',
+        contactType: 'customer support',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi'],
+        hoursAvailable: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59',
+        },
+      },
+    ],
+  },
+};
